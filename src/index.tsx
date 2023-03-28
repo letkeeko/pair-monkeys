@@ -1,6 +1,14 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
 import App from "./App";
+import "@fontsource/kanit";
+import "@fontsource/kanit/100.css";
+import "@fontsource/kanit/200.css";
+import "@fontsource/kanit/300.css";
+import "@fontsource/kanit/400.css";
+import "@fontsource/kanit/500.css";
+import "@fontsource/kanit/600.css";
+import "@fontsource/kanit/700.css";
 import "./index.css";
 
 const root = document.getElementById("root");
