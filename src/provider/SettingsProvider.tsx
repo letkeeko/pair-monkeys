@@ -1,4 +1,5 @@
 import { createContext, createSignal, useContext } from "solid-js";
+import { createStorageSignal } from "@solid-primitives/storage";
 import type { JSXElement, Accessor, Setter } from "solid-js";
 
 interface SettingsProviderProps {
@@ -7,14 +8,10 @@ interface SettingsProviderProps {
   onChangeBackground: () => void;
   isDropdownOpen: Accessor<boolean>;
   setDropdownOpen: Setter<boolean>;
-  level: Accessor<LevelOption>;
-  setLevel: Setter<LevelOption>;
-}
-
-export enum LevelOption {
-  Easy = "easy",
-  Medium = "medium",
-  Hard = "hard",
+  isModalFormOpen: Accessor<boolean>;
+  setModalFormOpen: Setter<boolean>;
+  playerName: Accessor<string>;
+  setPlayerName: Setter<string>;
 }
 
 export const SettingsContext = createContext({} as SettingsProviderProps);
@@ -22,7 +19,8 @@ export const SettingsContext = createContext({} as SettingsProviderProps);
 const SettingsProvider = (props: { children: JSXElement }) => {
   const [backgroundIndex, setBackgroundIndex] = createSignal(0);
   const [isDropdownOpen, setDropdownOpen] = createSignal(false);
-  const [level, setLevel] = createSignal(LevelOption.Medium);
+  const [playerName, setPlayerName] = createStorageSignal("player", "");
+  const [isModalFormOpen, setModalFormOpen] = createSignal(false);
 
   const onChangeBackground = () => {
     if (backgroundIndex() === 11) {
@@ -40,8 +38,10 @@ const SettingsProvider = (props: { children: JSXElement }) => {
         onChangeBackground,
         isDropdownOpen,
         setDropdownOpen,
-        level,
-        setLevel,
+        isModalFormOpen,
+        setModalFormOpen,
+        playerName,
+        setPlayerName,
       }}
     >
       {props.children}
