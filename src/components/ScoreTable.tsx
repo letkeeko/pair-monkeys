@@ -1,26 +1,50 @@
+import { For } from "solid-js";
+import formatTimer from "utils/format-timer";
+import dayjs from "dayjs";
+import useGetRecords from "hooks/useGetRecords";
+
 const ScoreTable = () => {
+  const { data: recordsData, isLoading } = useGetRecords();
+
+  if (isLoading()) return <h2 class="text-lg mb-6">Loading...</h2>;
+
   return (
-    <div>
+    <div class="overflow-x-auto">
       <table class="table w-full">
         <thead>
           <tr>
-            <th></th>
+            <th>Rank</th>
             <th>Name</th>
+            <th>Time</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Name1</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>Name2</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Name3</td>
-          </tr>
+          {recordsData() && (
+            <For each={recordsData()} fallback={<div>Loading...</div>}>
+              {(record, index) => {
+                const formattedTimer = () => formatTimer(record.score);
+
+                const formattedDate = () =>
+                  dayjs(record.created_at).format("MMM D, YYYY");
+
+                return (
+                  <tr>
+                    <th>{index() + 1}</th>
+                    <td>{record.player_name}</td>
+                    <td>
+                      {formattedTimer().hours}
+                      {" : "}
+                      {formattedTimer().minutes}
+                      {" : "}
+                      {formattedTimer().seconds}
+                    </td>
+                    <td>{formattedDate()}</td>
+                  </tr>
+                );
+              }}
+            </For>
+          )}
         </tbody>
       </table>
     </div>

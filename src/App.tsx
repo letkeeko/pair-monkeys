@@ -6,6 +6,7 @@ import {
   ModalPlayWarning,
   ModalPlayComplete,
   ModalFormName,
+  ModalScoreTable,
 } from "components/Modals";
 
 const App: Component = () => {
@@ -16,6 +17,7 @@ const App: Component = () => {
         <ModalPlayWarning />
         <ModalPlayComplete />
         <ModalFormName />
+        <ModalScoreTable />
       </PlayProvider>
     </SettingsProvider>
   );

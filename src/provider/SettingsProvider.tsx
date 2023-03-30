@@ -12,6 +12,8 @@ interface SettingsProviderProps {
   setModalFormOpen: Setter<boolean>;
   playerName: Accessor<string>;
   setPlayerName: Setter<string>;
+  isModalRankRecordsOpen: Accessor<boolean>;
+  setModalRankRecordsOpen: Setter<boolean>;
 }
 
 export const SettingsContext = createContext({} as SettingsProviderProps);
@@ -21,6 +23,7 @@ const SettingsProvider = (props: { children: JSXElement }) => {
   const [isDropdownOpen, setDropdownOpen] = createSignal(false);
   const [playerName, setPlayerName] = createStorageSignal("player", "");
   const [isModalFormOpen, setModalFormOpen] = createSignal(false);
+  const [isModalRankRecordsOpen, setModalRankRecordsOpen] = createSignal(false);
 
   const onChangeBackground = () => {
     if (backgroundIndex() === 11) {
@@ -42,6 +45,8 @@ const SettingsProvider = (props: { children: JSXElement }) => {
         setModalFormOpen,
         playerName,
         setPlayerName,
+        isModalRankRecordsOpen,
+        setModalRankRecordsOpen,
       }}
     >
       {props.children}
