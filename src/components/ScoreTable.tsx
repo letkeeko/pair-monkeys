@@ -6,7 +6,7 @@ import useGetRecords from "hooks/useGetRecords";
 const ScoreTable = () => {
   const { data: recordsData, isLoading } = useGetRecords();
 
-  if (isLoading()) return <h2 class="text-lg mb-6">Loading...</h2>;
+  if (isLoading()) return <h2 class="text-lg mb-6 text-center">Loading...</h2>;
 
   return (
     <div class="overflow-x-auto">
@@ -21,7 +21,7 @@ const ScoreTable = () => {
         </thead>
         <tbody>
           {recordsData() && (
-            <For each={recordsData()} fallback={<div>Loading...</div>}>
+            <For each={recordsData()}>
               {(record, index) => {
                 const formattedTimer = () => formatTimer(record.score);
 

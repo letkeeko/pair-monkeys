@@ -16,11 +16,12 @@ const MatchGrid: Component = () => {
         {(monkey) => (
           <button
             class={classNames(
-              "relative max-w-[150px] border-[1px] active:scale-95 duration-75",
+              "relative max-w-[150px] border-[1px] active:scale-95 duration-75 min-h-[60px]",
               {
                 "pointer-events-none":
                   isDisableClick() ||
-                  !!pairedMonkeys().find((m) => m.id === monkey.id),
+                  !!pairedMonkeys().find((m) => m.id === monkey.id) ||
+                  !!activeMonkeys().find((m) => m.id === monkey.id),
               }
             )}
             onClick={() => onImageClick(monkey)}
@@ -51,11 +52,12 @@ const MatchGrid: Component = () => {
         {(monkey) => (
           <button
             class={classNames(
-              "relative max-w-[150px] border-[1px] active:scale-95 duration-75",
+              "relative max-w-[150px] border-[1px] active:scale-95 duration-75 min-h-[60px]",
               {
                 "pointer-events-none":
                   isDisableClick() ||
-                  !!pairedMonkeys().find((m) => m.id === monkey.id),
+                  !!pairedMonkeys().find((m) => m.id === monkey.id) ||
+                  !!activeMonkeys().find((m) => m.id === monkey.id),
               }
             )}
             onClick={() => onImageClick(monkey)}
