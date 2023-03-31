@@ -9,7 +9,7 @@ const RootLayout = () => {
 
   return (
     <div
-      style={`background-image: url(${BACKGROUNDS[backgroundIndex()].url})`}
+      style={`background-image: url(${BACKGROUNDS[backgroundIndex()!].url})`}
       class={`relative h-screen bg-[url('assets/background-images/option${backgroundIndex()}.jpg')] bg-no-repeat bg-cover bg-center`}
     >
       <div class="mx-auto px-1 sm:px-4 container">

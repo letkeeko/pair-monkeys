@@ -76,15 +76,13 @@ const PlayProvider = (props: { children: JSXElement }) => {
   const completeSound = makeAudio(completeAudio);
 
   createEffect(() => {
-    let interval = 0;
-
     if (isTimerOn()) {
-      interval = setInterval(() => {
+      const interval = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
       }, 10);
-    }
 
-    onCleanup(() => clearInterval(interval));
+      onCleanup(() => clearInterval(interval));
+    }
   });
 
   const onImageClick = (monkey: Monkey) => {

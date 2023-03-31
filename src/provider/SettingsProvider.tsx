@@ -3,14 +3,14 @@ import { createStorageSignal } from "@solid-primitives/storage";
 import type { JSXElement, Accessor, Setter } from "solid-js";
 
 interface SettingsProviderProps {
-  backgroundIndex: Accessor<number>;
+  backgroundIndex: Accessor<number | null>;
   setBackgroundIndex: Setter<number>;
   onChangeBackground: () => void;
   isDropdownOpen: Accessor<boolean>;
   setDropdownOpen: Setter<boolean>;
   isModalFormOpen: Accessor<boolean>;
   setModalFormOpen: Setter<boolean>;
-  playerName: Accessor<string>;
+  playerName: Accessor<string | null>;
   setPlayerName: Setter<string>;
   isModalRankRecordsOpen: Accessor<boolean>;
   setModalRankRecordsOpen: Setter<boolean>;
@@ -19,7 +19,10 @@ interface SettingsProviderProps {
 export const SettingsContext = createContext({} as SettingsProviderProps);
 
 const SettingsProvider = (props: { children: JSXElement }) => {
-  const [backgroundIndex, setBackgroundIndex] = createSignal(0);
+  const [backgroundIndex, setBackgroundIndex] = createStorageSignal(
+    "background",
+    1
+  );
   const [isDropdownOpen, setDropdownOpen] = createSignal(false);
   const [playerName, setPlayerName] = createStorageSignal("player", "");
   const [isModalFormOpen, setModalFormOpen] = createSignal(false);
@@ -30,7 +33,8 @@ const SettingsProvider = (props: { children: JSXElement }) => {
       setBackgroundIndex(0);
       return;
     }
-    setBackgroundIndex(backgroundIndex() + 1);
+
+    setBackgroundIndex(Number(backgroundIndex()!) + 1); // ensure transform to a number, value from localStorage
   };
 
   return (

@@ -1,5 +1,5 @@
 import { usePlay } from "provider/PlayProvider";
-import { createSignal } from "solid-js";
+import { Accessor, createSignal } from "solid-js";
 import { Portal } from "solid-js/web";
 import formatTimer from "utils/format-timer";
 import { useSettings } from "provider/SettingsProvider";
@@ -12,7 +12,7 @@ export const ModalFormName = () => {
   const { isModalFormOpen, setModalFormOpen, playerName, setPlayerName } =
     useSettings();
 
-  if (!playerName() || playerName().length <= 2) setModalFormOpen(true);
+  if (playerName()!.length <= 2) setModalFormOpen(true);
 
   const [isNameEmpty, setNameEmpty] = createSignal(false);
 
@@ -35,7 +35,7 @@ export const ModalFormName = () => {
             onSubmit={(e) => {
               e.preventDefault();
 
-              if (playerName().length <= 2) {
+              if (playerName()!.length <= 2) {
                 setNameEmpty(true);
                 return;
               }
@@ -46,7 +46,7 @@ export const ModalFormName = () => {
             <input
               class="input input-primary block mx-auto font-light w-[230px] border-secondary"
               placeholder="Your name"
-              value={playerName() || ""}
+              value={playerName()!}
               onFocus={() => {
                 if (isNameEmpty()) setNameEmpty(false);
               }}
@@ -125,10 +125,9 @@ export const ModalPlayComplete = () => {
             <button
               onClick={() => {
                 insertPlayerScore({
-                  playerName: playerName,
+                  playerName: playerName as Accessor<string>,
                   score: time,
                 });
-                // onReset();
               }}
               class={classNames("btn btn-success text-primary", {
                 loading: isLoading(),

@@ -27,4 +27,4 @@ const BACKGROUNDS = [
   { id: 12, url: background12 },
 ];
 
-export default shuffleArray(BACKGROUNDS);
+export default BACKGROUNDS;
