@@ -23,7 +23,7 @@ const ScoreTable = () => {
           {recordsData() && (
             <For each={recordsData()}>
               {(record, index) => {
-                const formattedTimer = () => formatTimer(record.score);
+                const formattedTimer = () => formatTimer(record.time_record);
 
                 const formattedDate = () =>
                   dayjs(record.created_at).format("MMM D, YYYY");

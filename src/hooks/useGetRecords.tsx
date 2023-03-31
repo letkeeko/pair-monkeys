@@ -6,7 +6,7 @@ interface Record {
   created_at: string;
   id: number;
   player_name: string;
-  score: number;
+  time_record: number;
 }
 
 const useGetRecords = () => {
@@ -21,7 +21,7 @@ const useGetRecords = () => {
       const { data } = await supabase
         .from("records")
         .select()
-        .order("score", { ascending: true });
+        .order("time_record", { ascending: true });
 
       if (data) {
         const result = data as Record[];

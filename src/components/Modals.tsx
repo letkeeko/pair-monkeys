@@ -126,7 +126,7 @@ export const ModalPlayComplete = () => {
               onClick={() => {
                 insertPlayerScore({
                   playerName: playerName as Accessor<string>,
-                  score: time,
+                  time_record: time,
                 });
               }}
               class={classNames("btn btn-success text-primary", {
